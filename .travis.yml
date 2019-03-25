@@ -1,8 +1,12 @@
 language: python
-python: 3.6
+python:
+  - 3.6
+  - 3.7-dev
 before_install:
   - pip install pipenv
 install:
   - pipenv install
 script:
   - pytest
+notifications:
+  email: never
