@@ -6,3 +6,5 @@ install:
   - pipenv install
 script:
   - pytest
+notifications:
+  email: never
