@@ -8,6 +8,6 @@ install:
   - pipenv install
   - pip install -e .
 script:
-  - pytest
+  - pytest --flake8
 notifications:
   email: never
