@@ -6,3 +6,16 @@ Python script that takes a plaintext files with image URLs and downloads them to
 
 ## Requirements
 - Python 3.6+
+
+## Setup
+In order to run the test suite and modify the code:
+
+```shell
+$ git clone https://github.com/flowfx/fileget
+$ cd fileget
+$ pipenv install --dev
+$ pip install -e .
+$ pytest
+```
+
+More or less.
