@@ -5,7 +5,7 @@
 Python script that takes a plaintext files with image URLs and downloads them to local hard disk.
 
 ## Requirements
-- Python 3.6+
+- Python 3.6+ (because f-strings)
 
 ## Setup
 In order to run the test suite and modify the code:
