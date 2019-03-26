@@ -1,0 +1,34 @@
+# configure updates globally
+update: all
+
+# configure dependency pinning globally
+pin: True
+
+# set the default branch
+branch: master
+
+# update schedule
+schedule: "every day"
+
+# search for requirement files
+search: False
+
+# Specify requirement files by hand, default is empty
+requirements:
+  - Pipfile
+  - Pipfile.lock
+
+# add a label to pull requests
+label_prs: pyup
+
+# assign users to pull requests
+#assignees:
+
+# configure the branch prefix the bot is using
+branch_prefix: pyup/
+
+# set a global prefix for PRs
+#pr_prefix:
+
+# allow to close stale PRs
+close_prs: True
