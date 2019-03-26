@@ -5,16 +5,22 @@ from fileget import fileget
 
 
 def test_fileget(isolated_filesystem_runner):
+    # GIVEN a text file with URLs to existing files on the internets
     images = ("https://flowfx.de/images/flowfx.jpg\n"
               "https://flowfx.de/images/flowfx.thumbnail.jpg")
 
     with open('images.txt', 'w') as file:
         file.write(images)
 
+    # WHEN executing the script
     result = isolated_filesystem_runner.invoke(fileget, ['images.txt'])
+
+    # THEN it returns success and displays the filenames that have been
+    # downloaded
     assert result.exit_code == 0
     assert result.output == f'{images}\n'
 
+    # AND the files are actually doenloaded to the local file system
     assert os.path.isfile('flowfx.jpg')
     assert os.path.isfile('flowfx.thumbnail.jpg')
 
