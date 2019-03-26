@@ -17,3 +17,31 @@ def test_fileget(isolated_filesystem_runner):
 
     assert os.path.isfile('flowfx.jpg')
     assert os.path.isfile('flowfx.thumbnail.jpg')
+
+
+def test_empty_file(isolated_filesystem_runner):
+    # GIVEN an empty input file
+    images = ''
+
+    with open('images.txt', 'w') as file:
+        file.write(images)
+
+    # WHEN executing the script
+    result = isolated_filesystem_runner.invoke(fileget, ['images.txt'])
+
+    # THEN it returns success and no output
+    assert result.exit_code == 0
+    assert result.output == ''
+
+
+def test_no_file(isolated_filesystem_runner):
+    # GIVEN no input file
+    # WHEN executing the script
+    result = isolated_filesystem_runner.invoke(fileget)
+
+    # THEN it exits with an error
+    assert result.exit_code != 0
+
+    # AND displays a help text
+    expected = 'Usage: fileget [OPTIONS] FILE'
+    assert expected in result.output
