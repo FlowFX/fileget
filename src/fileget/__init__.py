@@ -1,11 +1,13 @@
+"""The main module."""
 import click
 import requests
 
 
 @click.command()
-@click.argument('f', type=click.File())
-def fileget(f):
-    content = f.readlines()
+@click.argument('file', type=click.File())
+def fileget(file):
+    """Takes a file, and downloads the images from the given URLs."""
+    content = file.readlines()
     lines = [line.strip() for line in content]
 
     for url in lines:
