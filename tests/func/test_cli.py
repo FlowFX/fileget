@@ -1,5 +1,6 @@
 """System level tests of the fileget module."""
 import os
+import magic
 
 from fileget import fileget
 
@@ -23,6 +24,10 @@ def test_fileget(isolated_filesystem_runner):
     # AND the files are actually doenloaded to the local file system
     assert os.path.isfile('flowfx.thumbnail.jpg')
     assert os.path.isfile('200')
+
+    # AND the files are actually image files
+    assert magic.from_file('flowfx.thumbnail.jpg', mime=True) == 'image/jpeg'
+    assert magic.from_file('200', mime=True) == 'image/jpeg'
 
 
 def test_empty_file(isolated_filesystem_runner):
