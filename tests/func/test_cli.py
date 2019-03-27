@@ -2,7 +2,7 @@
 import os
 import magic
 
-from fileget import fileget
+from fileget.cli import cli
 
 
 def test_fileget(isolated_filesystem_runner):
@@ -14,7 +14,7 @@ def test_fileget(isolated_filesystem_runner):
         file.write(images)
 
     # WHEN executing the script
-    result = isolated_filesystem_runner.invoke(fileget, ['images.txt'])
+    result = isolated_filesystem_runner.invoke(cli, ['images.txt'])
 
     # THEN it returns success and displays the filenames that have been
     # downloaded
@@ -38,7 +38,7 @@ def test_empty_file(isolated_filesystem_runner):
         file.write(images)
 
     # WHEN executing the script
-    result = isolated_filesystem_runner.invoke(fileget, ['images.txt'])
+    result = isolated_filesystem_runner.invoke(cli, ['images.txt'])
 
     # THEN it returns success and no output
     assert result.exit_code == 0
@@ -48,11 +48,11 @@ def test_empty_file(isolated_filesystem_runner):
 def test_no_file(isolated_filesystem_runner):
     # GIVEN no input file
     # WHEN executing the script
-    result = isolated_filesystem_runner.invoke(fileget)
+    result = isolated_filesystem_runner.invoke(cli)
 
     # THEN it exits with an error
     assert result.exit_code != 0
 
     # AND displays a help text
-    expected = 'Usage: fileget [OPTIONS] FILE'
+    expected = 'Usage: cli [OPTIONS] FILE'
     assert expected in result.output

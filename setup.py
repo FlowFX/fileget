@@ -15,9 +15,9 @@ setup(
 
     install_requires=['click', 'requests'],
 
-    # entry_points={
-        # 'console_scripts': [
-            # 'tasks = tasks.cli:tasks_cli',
-        # ]
-    # },
+    entry_points={
+        'console_scripts': [
+            'fileget = fileget.cli:cli',
+        ]
+    },
 )
