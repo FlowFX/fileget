@@ -6,8 +6,8 @@ from fileget import fileget
 
 def test_fileget(isolated_filesystem_runner):
     # GIVEN a text file with URLs to existing files on the internets
-    images = ("https://flowfx.de/images/flowfx.jpg\n"
-              "https://flowfx.de/images/flowfx.thumbnail.jpg")
+    images = ("https://flowfx.de/images/flowfx.thumbnail.jpg\n"
+              "http://placekitten.com/200/200")
 
     with open('images.txt', 'w') as file:
         file.write(images)
@@ -21,8 +21,8 @@ def test_fileget(isolated_filesystem_runner):
     assert result.output == f'{images}\n'
 
     # AND the files are actually doenloaded to the local file system
-    assert os.path.isfile('flowfx.jpg')
     assert os.path.isfile('flowfx.thumbnail.jpg')
+    assert os.path.isfile('200')
 
 
 def test_empty_file(isolated_filesystem_runner):
