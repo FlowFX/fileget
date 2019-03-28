@@ -14,6 +14,10 @@ def clean_input(content):
     return lines
 
 
+def item_show_func(item):
+    print(str(item))
+
+
 @click.command()
 @click.argument('file', type=click.File())
 def cli(file):
@@ -21,13 +25,24 @@ def cli(file):
     content = file.readlines()
 
     lines = clean_input(content)
+    print(len(lines))
 
-    for url in lines:
-        response = requests.get(url)
+    click.secho('Hello World!', fg='green')
+    click.echo(click.style('ERROR', fg='red'))
 
-        file_name = url.split('/')[-1]
+    with click.progressbar(lines, item_show_func=item_show_func) as bar:
+        for url in bar:
+            # click.echo(Downloading url …)
+            response = requests.get(url)
 
-        with open(file_name, 'wb') as out_file:
-            out_file.write(response.content)
+            # click.echo(DONE / ERROR):w
 
-        click.echo(url)
+
+            # if 
+
+            file_name = url.split('/')[-1]
+
+            with open(file_name, 'wb') as out_file:
+                out_file.write(response.content)
+
+            # click.echo(url)
